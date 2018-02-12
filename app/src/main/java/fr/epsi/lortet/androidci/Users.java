@@ -60,6 +60,8 @@ public class Users {
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery("SELECT * FROM Users WHERE NAME = " + username + "AND PASS = " + password);
                 if(rs.next()) {
+                    name = username;
+                    id = 5;
                     return;
                 }
                 rs.close();
