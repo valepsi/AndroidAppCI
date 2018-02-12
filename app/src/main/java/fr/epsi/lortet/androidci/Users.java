@@ -46,7 +46,7 @@ public class Users {
         }
 
         final String JDBC_DRIVER = "org.postgresql.Driver";
-        final String DB_URL = "jdbc:postgresql://" + dbUrl + ":" + dbPort + "/Users";
+        final String DB_URL = "jdbc:postgresql://" + dbUrl + ":" + dbPort + "/postgres";
 
         try {
             Class.forName(JDBC_DRIVER);
