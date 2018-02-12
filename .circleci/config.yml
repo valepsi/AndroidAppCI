@@ -35,10 +35,12 @@ jobs:
             echo Failed waiting for Postgres && exit 1
       
       - run:
-          # Add a password to the `ubuntu` user, since Postgres is configured to
-          # always ask for a password without sudo, and fails without one.
           command: sudo -u root psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
+      
+      - run:
           command: sudo -u root psql -p 5432 -c "alter user $DB_USERNAME with superuser;"
+      
+      - run:
           command: sudo -u root psql -p 5432 -c "create database Users;"
       
       - restore_cache:
