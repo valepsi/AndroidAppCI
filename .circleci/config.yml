@@ -25,8 +25,8 @@ jobs:
       - run:
         # Add a password to the `ubuntu` user, since Postgres is configured to
         # always ask for a password without sudo, and fails without one.
-        command: sudo -u postgres psql -p 5432 -c "create user $DB_USER with password '$DB_PASSWORD';"
-        command: sudo -u postgres psql -p 5432 -c "alter user $DB_USER with superuser;"
+        command: sudo -u postgres psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
+        command: sudo -u postgres psql -p 5432 -c "alter user $DB_USERNAME with superuser;"
         command: sudo -u postgres psql -p 5432 -c "create database Users;"
       
       - restore_cache:
