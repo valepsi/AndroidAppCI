@@ -9,11 +9,18 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "DB_URL", "\"\""
+        buildConfigField "int", "DB_PORT", "0"
     }
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "DB_URL", "\"https://db.lortet.fr\""
+            buildConfigField "int", "DB_PORT", "5187"
         }
     }
 }
