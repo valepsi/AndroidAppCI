@@ -19,4 +19,9 @@ public class ExampleUnitTest {
     public void multiplication_isCorrect() throws Exception {
         assertEquals(4, 2 * 2);
     }
+
+    @Test
+    public void error_isCorrect() throws Exception {
+        assertEquals(4, 5);
+    }
 }
