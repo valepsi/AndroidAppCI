@@ -38,27 +38,11 @@ jobs:
               sleep 2
             done
             echo Failed waiting for Postgres && exit 1
-            
-      - run:
-          command: sleep 30
           
       - run:
           name: Running Test
           command: |
             psql -c "create database test" -U postgres -h localhost -p 5432
-          
-      - run:
-          name: Running Test 2
-          command: |
-            psql -c "create database test" -U postgres -h localhost -p 5433
-          
-      - run:
-          name: Running Test 3
-          command: sudo -u postgres psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
-          
-      - run:
-          name: Running Test 4
-          command: sudo -u postgres psql -p 5433 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
       
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
