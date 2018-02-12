@@ -56,7 +56,5 @@ jobs:
                   
       - run:
           name: JFrog
-          command:
-            - cp app/build/outputs/apk/release/app-release-unsigned.apk "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk"
-            - curl -T "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" "$ARTIFACTORY_URL"          
+          command: cp app/build/outputs/apk/release/app-release-unsigned.apk "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" && curl -T "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" "$ARTIFACTORY_URL"          
                   
