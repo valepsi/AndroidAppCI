@@ -17,6 +17,6 @@ public class ExampleUnitTest {
 
     @Test
     public void multiplication_isCorrect() throws Exception {
-        assertEquals(4, 2 * 3);
+        assertEquals(4, 2 * 2);
     }
 }
