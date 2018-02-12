@@ -16,7 +16,7 @@ public class Users {
 
         Map<String,String> env = System.getenv();
 
-        if(env.get("platform").equals("dev")) {
+        if(env.get("platform") != null && env.get("platform").equals("dev")) {
             if (!username.equals("dev") || !password.equals("dev_pass")) {
                 throw new IncorrectLoginException("Bad username/password for platform '" + env.get("platform") + "'");
             }
