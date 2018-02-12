@@ -8,14 +8,15 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+          environment:
+          JVM_OPTS: -Xmx3200m
+          TERM: dumb
+      
       - image: mysql:5.6
           environment:
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
             - MYSQL_USER=ubuntu
             - MYSQL_PASSWORD=
-    environment:
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
     steps:
       - checkout
       
