@@ -40,7 +40,7 @@ jobs:
             echo Failed waiting for Postgres && exit 1
             
       - run:
-          command: sleep 25
+          command: sleep 30
           
       - run:
           name: Running Test
@@ -48,9 +48,11 @@ jobs:
             psql -c "create database test" -U postgres
           
       - run:
+          name: Running Test
           command: sudo -u root psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
           
       - run:
+          name: Running Test
           command: sudo -u root psql -p 5433 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
      # 
      # - run:
