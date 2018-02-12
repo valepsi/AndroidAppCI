@@ -19,8 +19,8 @@ public class Users {
 
         Map<String,String> env = System.getenv();
 
-        if(env.get("platform") != null && env.get("platform").equals("dev")) {
-            if (!username.equals("dev") || !password.equals("dev_pass")) {
+        if(env.get("platform") != null && "dev".equals(env.get("platform"))) {
+            if (!"dev".equals(username) || !"dev_pass".equals(password)) {
                 throw new IncorrectLoginException("Bad username/password for platform '" + env.get("platform") + "'");
             }
             id = 1;
@@ -49,7 +49,7 @@ public class Users {
         final String DB_URL = "jdbc:postgresql://" + dbUrl + ":" + dbPort + "/Users";
 
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(JDBC_DRIVER);
             System.out.println("Driver O.K.");
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
@@ -57,15 +57,12 @@ public class Users {
 
             } catch (SQLException e) {
 
-                e.printStackTrace();
-                throw new IncorrectLoginException(e.getMessage());
+                throw new IncorrectLoginException("Connection error => " + e.getMessage());
             }
 
         } catch (ClassNotFoundException e) {
 
-            System.out.println("Unknow Driver");
-            e.printStackTrace();
-            throw new IncorrectLoginException(e.getMessage());
+            throw new IncorrectLoginException("Unknow drive => " + e.getMessage());
         }
     }
 }
