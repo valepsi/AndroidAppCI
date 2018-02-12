@@ -57,6 +57,7 @@ public class Users {
                 Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
                 System.out.println("Connection O.K.");
 
+                /*
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery("SELECT * FROM Users WHERE NAME = " + username);
                 if(rs.next()) {
@@ -68,6 +69,7 @@ public class Users {
                 st.close();
 
                 throw new IncorrectLoginException("User not found for " + username + " pass " + password);
+                */
 
             } catch (SQLException e) {
 
