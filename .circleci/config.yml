@@ -42,7 +42,8 @@ jobs:
       - run:
           name: Running Test
           command: |
-            psql -c "create database test" -U postgres -h localhost -p 5432
+            psql -c "create database Users" -U postgres -h localhost -p 5432
+            psql -c "create table Users(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL)" -U postgres -h localhost -p 5432
       
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
