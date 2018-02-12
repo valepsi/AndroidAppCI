@@ -27,6 +27,10 @@ android {
             buildConfigField "String", "DB_PASSWORD", "\"pass\""
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
