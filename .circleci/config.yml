@@ -42,9 +42,13 @@ jobs:
       - run:
           name: Running Test
           command: |
+            echo "create database Users"
             psql -c "create database Users" -U postgres -h localhost -p 5432
+            echo "create table Users(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL)"
             psql -c "create table Users(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL)" -U postgres -h localhost -p 5432
-            psql -c "create user $DB_USERNAME with password '$DB_PASSWORD'" -U postgres -h localhost -p 5432     
+            echo "create user $DB_USERNAME with password '$DB_PASSWORD'"
+            psql -c "create user $DB_USERNAME with password '$DB_PASSWORD'" -U postgres -h localhost -p 5432 
+            echo "alter user $DB_USERNAME with superuser"
             psql -c "alter user $DB_USERNAME with superuser" -U postgres -h localhost -p 5432      
       
       
