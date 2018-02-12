@@ -2,7 +2,9 @@ package fr.epsi.lortet.androidci;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 
 public class Users {
@@ -54,6 +56,16 @@ public class Users {
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
                 System.out.println("Connection O.K.");
+
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery("SELECT * FROM Users WHERE NAME = " + username + "AND PASS = " + password);
+                if(rs.next()) {
+                    return;
+                }
+                rs.close();
+                st.close();
+
+                throw new IncorrectLoginException("User not found for " + username + " pass " + password);
 
             } catch (SQLException e) {
 
