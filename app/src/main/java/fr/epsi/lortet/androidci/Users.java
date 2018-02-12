@@ -32,7 +32,7 @@ public class Users {
         String dbUrl;
         int dbPort;
         String dbUsername;
-        String dbPassword
+        String dbPassword;
         if(env.get("platform") != null && env.get("platform").equals("circleci")) {
             dbUrl = env.get("DB_URL");
             dbPort = Integer.parseInt(env.get("DB_PORT"));
