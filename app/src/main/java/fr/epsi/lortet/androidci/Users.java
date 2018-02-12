@@ -28,7 +28,7 @@ public class Users {
 
         String dbUrl;
         int dbPort;
-        if(env.get("platform").equals("circleci")) {
+        if(env.get("platform") != null && env.get("platform").equals("circleci")) {
             dbUrl = env.get("DB_URL");
             dbPort = Integer.parseInt(env.get("DB_PORT"));
         } else {
