@@ -15,8 +15,7 @@ jobs:
         
       - image: circleci/postgres:9.6.2-alpine
         environment:
-        - POSTGRES_USER: root
-        - POSTGRES_DB: circle-test_test
+        - POSTGRES_USER: postgres
       
     steps:
       - checkout
@@ -32,13 +31,18 @@ jobs:
             sudo apt-get install postgresql-client
           
       - run:
-          command: sudo -u root psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
-      
-      - run:
-          command: sudo -u root psql -p 5432 -c "alter user $DB_USERNAME with superuser;"
-      
-      - run:
-          command: sudo -u root psql -p 5432 -c "create database Users;"
+          name: Running Test
+          command: |
+            psql -c "create database test" -U postgres
+          
+      #- run:
+      #    command: sudo -u root psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
+     # 
+     # - run:
+     #     command: sudo -u root psql -p 5432 -c "alter user $DB_USERNAME with superuser;"
+     # 
+     # - run:
+     #     command: sudo -u root psql -p 5432 -c "create database Users;"
       
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
