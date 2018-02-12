@@ -26,9 +26,7 @@ jobs:
 
       - run:
           name: Installing Dependencies
-          command: |
-            yarn install
-            sudo apt-get install postgresql-client
+          command: sudo apt-get install postgresql-client
           
       - run:
           name: Running Test
