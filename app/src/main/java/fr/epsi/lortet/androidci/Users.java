@@ -1,5 +1,8 @@
 package fr.epsi.lortet.androidci;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Map;
 
 public class Users {
@@ -28,14 +31,40 @@ public class Users {
 
         String dbUrl;
         int dbPort;
+        String dbUsername;
+        String dbPassword
         if(env.get("platform") != null && env.get("platform").equals("circleci")) {
             dbUrl = env.get("DB_URL");
             dbPort = Integer.parseInt(env.get("DB_PORT"));
+            dbUsername = env.get("DB_USERNAME");
+            dbPassword = env.get("DB_PASSWORD");
         } else {
             dbUrl = BuildConfig.DB_URL;
             dbPort = BuildConfig.DB_PORT;
+            dbUsername = BuildConfig.DB_USERNAME;
+            dbPassword = BuildConfig.DB_PASSWORD;
         }
 
-        throw new IncorrectLoginException("db url " + dbUrl + " dbPort " + dbPort);
+        final String JDBC_DRIVER = "org.postgresql.Driver";
+        final String DB_URL = "jdbc:postgresql://" + dbUrl + ":" + dbPort + "/Users";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            System.out.println("Driver O.K.");
+            try {
+                Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
+                System.out.println("Connection O.K.");
+
+            } catch (SQLException e) {
+
+                e.printStackTrace();
+                throw new IncorrectLoginException(e.getMessage());
+            }
+
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+            throw new IncorrectLoginException(e.getMessage());
+        }
     }
 }
