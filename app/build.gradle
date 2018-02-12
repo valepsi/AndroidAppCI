@@ -24,7 +24,7 @@ android {
             buildConfigField "String", "DB_URL", "\"https://db.lortet.fr\""
             buildConfigField "int", "DB_PORT", "5187"
             buildConfigField "String", "DB_USERNAME", "\"user\""
-            buildConfigField "int", "DB_PASSWORD", "\"pass\""
+            buildConfigField "String", "DB_PASSWORD", "\"pass\""
         }
     }
 }
