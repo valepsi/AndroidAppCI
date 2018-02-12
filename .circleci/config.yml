@@ -19,15 +19,14 @@ jobs:
       
     steps:
       - checkout
-      
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: Installing Dependencies
           command: sudo apt-get install postgresql-client
-          
+      
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
           
       - run:
           name: Waiting for PostgreSQL to start
@@ -41,17 +40,18 @@ jobs:
             echo Failed waiting for Postgres && exit 1
             
       - run:
-          command: sleep 10
-          
-
+          command: sleep 25
           
       - run:
           name: Running Test
           command: |
             psql -c "create database test" -U postgres
           
-      #- run:
-      #    command: sudo -u root psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
+      - run:
+          command: sudo -u root psql -p 5432 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
+          
+      - run:
+          command: sudo -u root psql -p 5433 -c "create user $DB_USERNAME with password '$DB_PASSWORD';"
      # 
      # - run:
      #     command: sudo -u root psql -p 5432 -c "alter user $DB_USERNAME with superuser;"
