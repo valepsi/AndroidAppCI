@@ -13,25 +13,44 @@ jobs:
       TERM: dumb
     steps:
       - checkout
+      
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      
       - run:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this. 
          command: sudo chmod +x ./gradlew
+      
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      
       - run:
           name: Run Tests
           command: ./gradlew lint test
+      
       - store_artifacts:
           path: app/build/reports
           destination: reports
+      
       - store_test_results:
           path: app/build/test-results
+          
+      - run:
+          name: Build APK
+          command: ./gradlew assembleRelease
+
       - store_artifacts:
             path: app/build/outputs/apk/
             destination: apks/
 
-
+      - save_cache:
+                key: anysoftkeyboard-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}-{{ checksum "circle.yml" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+                paths:
+                  - "~/.gradle/3.4.1"
+                  - "~/.gradle/wrapper/dists/gradle-3.4.1-bin"
+                  - "~/.gradle/caches/modules-2"
+                  - "~/.gradle/buildOutputCleanup"
+                  - "~/.m2"
+                  
