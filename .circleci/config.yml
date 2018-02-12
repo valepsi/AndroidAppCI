@@ -45,7 +45,7 @@ jobs:
             psql -c "create table Users(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, PASS TEXT NOT NULL)" -U postgres -h localhost -p 5432
             psql -c "create user userci with password 'passwordci'" -U postgres -h localhost -p 5432 
             psql -c "alter user userci with superuser" -U postgres -h localhost -p 5432      
-            psql -c "insert into Users (NAME, PASS) VALUES ('test_ci', 'test_ci')" -U postgres -h localhost -p 5432      
+            psql -c "insert into Users (ID, NAME, PASS) VALUES (1, 'test_ci', 'test_ci')" -U postgres -h localhost -p 5432      
       
       
       - restore_cache:
