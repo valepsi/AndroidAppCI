@@ -16,7 +16,7 @@ public class LoginTest {
         Users user = new Users();
 
         try {
-            user.login(env.get("test_login"), "-");
+            user.login(env.get("test_login"), env.get("test_password"));
         } catch(IncorrectLoginException e) {
             fail(e.getMessage());
         }
