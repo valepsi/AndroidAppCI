@@ -54,7 +54,7 @@ jobs:
                   - "~/.gradle/buildOutputCleanup"
                   - "~/.m2"
                   
-#      - run:
-#          name: JFrog
-#          command: (cp app/build/outputs/apk/release/app-release-unsigned.apk "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" || echo "Erreur de copie") && curl -T "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" "$ARTIFACTORY_URL"          
+      - run:
+          name: JFrog
+          command: (cp app/build/outputs/apk/release/app-release-unsigned.apk "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" || echo "Erreur de copie") && curl -T "app/build/outputs/apk/release/app-release-v$CIRCLE_BUILD_NUM.apk" "$ARTIFACTORY_URL"          
                   
